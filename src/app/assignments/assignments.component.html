@@ -1,0 +1,110 @@
+<button mat-flat-button color="primary" (click)="initialiserLaBaseAvecDonneesDeTest()">PeuplerBD</button>
+<button mat-button class="left" color="primary" (click)="deconnexion()">Deconnexion</button>
+<main class="container">
+  <h2>{{ titre }}</h2>
+  <div class="ajouterBtn">
+    Nombre total d'assignments : {{ totalDocs }}&nbsp;
+    <a routerLink="/add">
+      <button mat-flat-button color="primary">Add assignment</button>
+    </a>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="assignments" class="demo-table">
+      <!-- Position Column -->
+      <ng-container matColumnDef="demo-id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="demo-nom">
+        <th mat-header-cell *matHeaderCellDef>Nom</th>
+        <td mat-cell *matCellDef="let element">{{ element.nom }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="demo-dateDeRendu">
+        <th mat-header-cell *matHeaderCellDef>Date de Rendu</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.dateDeRendu | date }}
+        </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="demo-rendu">
+        <th mat-header-cell *matHeaderCellDef>Rendu</th>
+        <td mat-cell *matCellDef="let element">{{ element.rendu }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="showAssignment(element)"
+          >
+            Show
+          </button>
+          &nbsp;
+          <button
+            mat-flat-button
+            color="warn"
+            (click)="deletAssignment(element)"
+          >
+            Delete
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        (click)="clickedRows.add(row)"
+        [class.demo-row-is-clicked]="clickedRows.has(row)"
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
+    </table>
+
+    <div class="paginationBtn">
+      Nombre d'assignments par page :
+      {{ limit }}
+      <mat-slider
+        thumbLabel
+        min="1"
+        max="100"
+        (change)="getAssignments()"
+        [(ngModel)]="limit"
+      ></mat-slider>
+      <button mat-icon-button (click)="premierePage()" [disabled]="page === 1">
+        <mat-icon>first_page</mat-icon>
+      </button>
+      &nbsp;
+      <button
+        mat-icon-button
+        (click)="pagePrecedente()"
+        [disabled]="!hasPrevPage"
+      >
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      &nbsp; {{ page }} of {{ totalPages }}
+      <button
+        mat-icon-button
+        (click)="pageSuivante()"
+        [disabled]="!hasNextPage"
+      >
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+      &nbsp;
+      <button
+        mat-icon-button
+        (click)="dernierePage()"
+        [disabled]="page === totalPages"
+      >
+        <mat-icon>last_page</mat-icon>
+      </button>
+    </div>
+  </div>
+</main>

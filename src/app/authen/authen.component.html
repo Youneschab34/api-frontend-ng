@@ -1,0 +1,22 @@
+<script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+<body>
+    <div id="formWrapper">
+
+        <div id="form">
+            <div class="logo">
+            </div>
+            <div class="form-item">
+                <label>Nom utilisateur:</label>
+                <input type="email" name="email" id="email" [(ngModel)]="username" class="form-style" autocomplete="off" placeholder="Nom d'utilisateur" />
+            </div>
+            <div class="form-item">
+                <label>Mot de passe:</label>
+                <input type="password" name="password" id="password" [(ngModel)]="password" class="form-style" placeholder="Mot de passe" />
+            </div>
+            <div class="form-item">
+                <input type="submit" class="login" value="Log In" (click)="login()" />
+                <div class="clear-fix"></div>
+            </div>
+        </div>
+    </div>
+</body>

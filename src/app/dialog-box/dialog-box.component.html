@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Deleting {{ data.nom }}</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want to delete?</p>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" mat-dialog-close>No</button>
+  <button mat-flat-button color="warn" [mat-dialog-close]="true">Yes</button>
+</mat-dialog-actions>
